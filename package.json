@@ -1,20 +1,38 @@
 {
-    "name": "next-snippets",
-    "displayName": "next-snippets",
-    "description": "",
-    "version": "0.0.1",
-    "engines": {
-        "vscode": "^1.70.0"
-    },
-    "categories": [
-        "Snippets"
-    ],
-    "contributes": {
-        "snippets": [
-            {
-                "language": "javascript",
-                "path": "./snippets/snippets.code-snippets"
-            }
-        ]
-    }
+  "version": "1.0.0",
+  "name": "next-snippets",
+  "displayName": "Next JS/TS Snippets",
+  "description": "A collection of Javascript and Typescript snippets for a awesome React framework called NEXT",
+  "icon": "images/next-logo.png",
+  "license": "MIT",
+  "keywords": [
+    "snippets",
+    "next",
+    "nextjs",
+    "javascript",
+    "typescript"
+  ],
+  "publisher": "loczek",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loczek/next-snippets.git"
+  },
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "typescriptreact",
+        "path": "./snippets/typescript.code-snippets"
+      },
+      {
+        "language": "javascriptreact",
+        "path": "./snippets/javascript.code-snippets"
+      }
+    ]
+  }
 }
