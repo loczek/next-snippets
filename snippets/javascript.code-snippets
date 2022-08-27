@@ -1,0 +1,96 @@
+{
+  "nextPageComponent": {
+    "prefix": ["npc"],
+    "body": [
+      "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}} = ({}) => {",
+      "  return <div>$2</div>",
+      "}",
+      "",
+      "export default ${1}"
+    ]
+  },
+  "nextPageComponentWithGetServerSideProps": {
+    "prefix": ["npcssp", "ssc"],
+    "body": [
+      "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}}= ({}) => {",
+      "  return <div>$2</div>",
+      "}",
+      "",
+      "export const getServerSideProps = async () => {",
+      "  return { props: {} }",
+      "}",
+      "",
+      "export default ${1}"
+    ]
+  },
+  "nextPageComponentWithStaticPathsAndProps": {
+    "prefix": "npcsp",
+    "body": [
+      "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}} = ({}) => {",
+      "  return <div>$2</div>",
+      "}",
+      "",
+      "export async function getStaticPaths() {",
+      "  return {",
+      "    paths: [{ params: { id: '1' } }, { params: { id: '2' } }],",
+      "    fallback: false,",
+      "  }",
+      "}",
+      "",
+      "export async function getStaticProps(context) {",
+      "  return {",
+      "    props: {},",
+      "  }",
+      "}",
+      "",
+      "export default ${1}"
+    ]
+  },
+  "getServerSideProps": {
+    "prefix": "nssp",
+    "body": [
+      "export const getServerSideProps = async () => {",
+      "  return { props: {} }",
+      "}"
+    ]
+  },
+  "nextStaticPathsAndProps": {
+    "prefix": "nsp",
+    "body": [
+      "export async function getStaticPaths() {",
+      "  return {",
+      "    paths: [{ params: { id: '1' } }, { params: { id: '2' } }],",
+      "    fallback: false,",
+      "  }",
+      "}",
+      "",
+      "export async function getStaticProps(context) {",
+      "  return {",
+      "    props: {},",
+      "  }",
+      "}"
+    ]
+  },
+  "nextApi": {
+    "prefix": ["napi"],
+    "body": [
+      "export default (req, res) => {",
+      "  res.status(200).json({ name: 'John Doe' })",
+      "}"
+    ]
+  },
+  "middleware": {
+    "prefix": ["nmid"],
+    "body": [
+      "import { NextResponse } from 'next/server'",
+      "",
+      "export async function middleware(request) {",
+      "  return NextResponse.redirect(new URL('/about-2', request.url))",
+      "}",
+      "",
+      "export const config = {",
+      "  matcher: '/about/:path*',",
+      "}"
+    ]
+  }
+}
