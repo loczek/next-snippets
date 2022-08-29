@@ -1,43 +1,38 @@
 {
-  "nextPageComponent": {
-    "prefix": ["npc"],
+  "nextPage": {
+    "prefix": ["np"],
     "body": [
       "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}} = ({}) => {",
-      "  return <div>$2</div>",
+      "  return <div>${2}</div>",
       "}",
       "",
       "export default ${1}"
     ]
   },
-  "nextPageComponentWithGetServerSideProps": {
-    "prefix": ["npcssp", "ssc"],
-    "body": [
-      "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}}= ({}) => {",
-      "  return <div>$2</div>",
-      "}",
-      "",
-      "export const getServerSideProps = async () => {",
-      "  return { props: {} }",
-      "}",
-      "",
-      "export default ${1}"
-    ]
-  },
-  "nextPageComponentWithStaticPathsAndProps": {
-    "prefix": "npcsp",
+  "nextPageServerSideProps": {
+    "prefix": ["npssp"],
     "body": [
       "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}} = ({}) => {",
-      "  return <div>$2</div>",
+      "  return <div>${2}</div>",
       "}",
       "",
-      "export async function getStaticPaths() {",
-      "  return {",
-      "    paths: [{ params: { id: '1' } }, { params: { id: '2' } }],",
-      "    fallback: false,",
+      "export const getServerSideProps = async (ctx) => {",
+      "  return { ",
+      "    props: {${3}}",
       "  }",
       "}",
       "",
-      "export async function getStaticProps(context) {",
+      "export default ${1}"
+    ]
+  },
+  "nextPageStaticProps": {
+    "prefix": ["npsp"],
+    "body": [
+      "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}} = ({}) => {",
+      "  return <div>${2}</div>",
+      "}",
+      "",
+      "export const getStaticProps = async (ctx) => {",
       "  return {",
       "    props: {},",
       "  }",
@@ -46,41 +41,62 @@
       "export default ${1}"
     ]
   },
-  "getServerSideProps": {
-    "prefix": "nssp",
+  "nextPageStaticPaths": {
+    "prefix": ["npspth"],
     "body": [
-      "export const getServerSideProps = async () => {",
-      "  return { props: {} }",
+      "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}} = ({}) => {",
+      "  return <div>${2}</div>",
+      "}",
+      "",
+      "export const getStaticPaths = async () => {",
+      "  return {",
+      "    paths: [],",
+      "  }",
+      "}",
+      "",
+      "export default ${1}"
+    ]
+  },
+  "nextServerSideProps": {
+    "prefix": ["nssp"],
+    "body": [
+      "export const getServerSideProps = async (ctx) => {",
+      "  return { ",
+      "    props: {${1}}",
+      "  }",
       "}"
     ]
   },
-  "nextStaticPathsAndProps": {
-    "prefix": "nsp",
+  "nextStaticProps": {
+    "prefix": ["nsp"],
     "body": [
-      "export async function getStaticPaths() {",
-      "  return {",
-      "    paths: [{ params: { id: '1' } }, { params: { id: '2' } }],",
-      "    fallback: false,",
-      "  }",
-      "}",
-      "",
-      "export async function getStaticProps(context) {",
+      "export const getStaticProps = async (ctx) => {",
       "  return {",
       "    props: {},",
+      "  }",
+      "}"
+    ]
+  },
+  "nextGetStaticPaths": {
+    "prefix": ["nspth"],
+    "body": [
+      "export const getStaticPaths = async () => {",
+      "  return {",
+      "    paths: [],",
       "  }",
       "}"
     ]
   },
   "nextApi": {
-    "prefix": ["napi"],
+    "prefix": ["na"],
     "body": [
       "export default (req, res) => {",
       "  res.status(200).json({ name: 'John Doe' })",
       "}"
     ]
   },
-  "middleware": {
-    "prefix": ["nmid"],
+  "nextMiddleware": {
+    "prefix": ["nm"],
     "body": [
       "import { NextResponse } from 'next/server'",
       "",

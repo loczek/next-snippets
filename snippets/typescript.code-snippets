@@ -1,55 +1,50 @@
 {
-  "nextPageComponent": {
-    "prefix": ["npc"],
+  "nextPage": {
+    "prefix": ["np"],
     "body": [
       "import { NextPage } from 'next'",
       "",
       "interface Props {}",
       "",
       "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}}: NextPage<Props> = ({}) => {",
-      "  return <div>$2</div>",
+      "  return <div>${2}</div>",
       "}",
       "",
       "export default ${1}"
     ]
   },
-  "nextPageComponentWithGetServerSideProps": {
-    "prefix": ["npcssp", "ssc"],
+  "nextPageServerSideProps": {
+    "prefix": ["npssp"],
     "body": [
-      "import { NextPage , GetServerSideProps } from 'next'",
+      "import { NextPage, GetServerSideProps } from 'next'",
       "",
       "interface Props {}",
       "",
       "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}}: NextPage<Props> = ({}) => {",
-      "  return <div>$2</div>",
+      "  return <div>${2}</div>",
       "}",
       "",
-      "export const getServerSideProps: GetServerSideProps = async () => {",
-      "  return { props: {} }",
-      "}",
-      "",
-      "export default ${1}"
-    ]
-  },
-  "nextPageComponentWithStaticPathsAndProps": {
-    "prefix": "npcsp",
-    "body": [
-      "import { NextPage , GetServerSideProps } from 'next'",
-      "",
-      "interface Props {}",
-      "",
-      "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}}: NextPage<Props> = ({}) => {",
-      "  return <div>$2</div>",
-      "}",
-      "",
-      "export async function getStaticPaths() {",
-      "  return {",
-      "    paths: [{ params: { id: '1' } }, { params: { id: '2' } }],",
-      "    fallback: false,",
+      "export const getServerSideProps: GetServerSideProps = async (ctx) => {",
+      "  return { ",
+      "    props: {${3}}",
       "  }",
       "}",
       "",
-      "export async function getStaticProps(context) {",
+      "export default ${1}"
+    ]
+  },
+  "nextPageStaticProps": {
+    "prefix": ["npsp"],
+    "body": [
+      "import { NextPage, GetStaticProps } from 'next'",
+      "",
+      "interface Props {}",
+      "",
+      "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}}: NextPage<Props> = ({}) => {",
+      "  return <div>${2}</div>",
+      "}",
+      "",
+      "export const getStaticProps: GetStaticProps = async (ctx) => {",
       "  return {",
       "    props: {},",
       "  }",
@@ -58,33 +53,58 @@
       "export default ${1}"
     ]
   },
-  "getServerSideProps": {
-    "prefix": "nssp",
+  "nextPageStaticPaths": {
+    "prefix": ["npspth"],
     "body": [
-      "export const getServerSideProps: GetServerSideProps = async () => {",
-      "  return { props: {} }",
+      "import { NextPage, GetStaticPaths } from 'next'",
+      "",
+      "interface Props {}",
+      "",
+      "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}}: NextPage<Props> = ({}) => {",
+      "  return <div>${2}</div>",
+      "}",
+      "",
+      "export const getStaticPaths: GetStaticPaths = async () => {",
+      "  return {",
+      "    paths: [],",
+      "  }",
+      "}",
+      "",
+      "export default ${1}"
+    ]
+  },
+  "nextServerSideProps": {
+    "prefix": ["nssp"],
+    "body": [
+      "export const getServerSideProps: GetServerSideProps = async (ctx) => {",
+      "  return { ",
+      "    props: {${1}}",
+      "  }",
       "}"
     ]
   },
-  "nextStaticPathsAndProps": {
-    "prefix": "nsp",
+  "nextStaticProps": {
+    "prefix": ["nsp"],
     "body": [
-      "export async function getStaticPaths() {",
-      "  return {",
-      "    paths: [{ params: { id: '1' } }, { params: { id: '2' } }],",
-      "    fallback: false,",
-      "  }",
-      "}",
-      "",
-      "export async function getStaticProps(context) {",
+      "export const getStaticProps: GetStaticProps = async (ctx) => {",
       "  return {",
       "    props: {},",
+      "  }",
+      "}"
+    ]
+  },
+  "nextGetStaticPaths": {
+    "prefix": ["nspth"],
+    "body": [
+      "export const getStaticPaths: GetStaticPaths = async () => {",
+      "  return {",
+      "    paths: [],",
       "  }",
       "}"
     ]
   },
   "nextApi": {
-    "prefix": ["napi"],
+    "prefix": ["na"],
     "body": [
       "import type { NextApiRequest, NextApiResponse } from 'next'",
       "",
@@ -95,8 +115,8 @@
       "}"
     ]
   },
-  "middleware": {
-    "prefix": ["nmid"],
+  "nextMiddleware": {
+    "prefix": ["nm"],
     "body": [
       "import { NextResponse } from 'next/server'",
       "import type { NextRequest } from 'next/server'",
