@@ -1,6 +1,6 @@
 {
   "version": "1.1.0",
-  "name": "next-snippets",
+  "name": "next-js-ts-snippets",
   "displayName": "Next JS/TS Snippets",
   "description": "A collection of Javascript and Typescript snippets for a awesome React framework called NEXT",
   "icon": "images/next-logo.png",
