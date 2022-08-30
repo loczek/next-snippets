@@ -28,7 +28,7 @@ by combining them you get the following snippets
 |   `np`   |            Next Page Component             |
 | `npssp`  | Next Page Component with Server Side Props |
 |  `npsp`  |   Next Page Component with Static Props    |
-| `npspth` |   Next Page Component with Static Props    |
+| `npspth` |   Next Page Component with Static Paths    |
 |  `nssp`  |           Next Server Side Props           |
 |  `nsp`   |             Next Static Props              |
 | `nspth`  |             Next Static Paths              |
