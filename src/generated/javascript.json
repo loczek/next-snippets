@@ -1,0 +1,23 @@
+{
+  "nextApi": {
+    "prefix": "na",
+    "body": [
+      "export default (req, res) => {",
+      "  ${1}",
+      "}"
+    ]
+  },
+  "nextMiddleware": {
+    "prefix": "nm",
+    "body": [
+      "import { NextResponse } from 'next/server'",
+      "export async function middleware(request) {",
+      "  ${1}",
+      "}",
+      "",
+      "export const config = {",
+      "  matcher: '/about/:path*',",
+      "}"
+    ]
+  }
+}

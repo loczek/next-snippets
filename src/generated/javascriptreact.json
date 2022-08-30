@@ -1,0 +1,98 @@
+{
+  "nextPage": {
+    "prefix": "np",
+    "body": [
+      "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}} = ({}) => {",
+      "  return <div>${2}</div>",
+      "}",
+      "",
+      "export default ${1}"
+    ]
+  },
+  "nextPageServerSideProps": {
+    "prefix": "npssp",
+    "body": [
+      "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}} = ({}) => {",
+      "  return <div>${2}</div>",
+      "}",
+      "",
+      "export const getServerSideProps = async (ctx) => {",
+      "  return {",
+      "    props: {}",
+      "  }",
+      "}",
+      "",
+      "export default ${1}"
+    ]
+  },
+  "nextPageStaticProps": {
+    "prefix": "npsp",
+    "body": [
+      "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}} = ({}) => {",
+      "  return <div>${2}</div>",
+      "}",
+      "",
+      "export const getStaticProps = async (ctx) => {",
+      "  return {",
+      "    props: {},",
+      "  }",
+      "}",
+      "",
+      "export default ${1}"
+    ]
+  },
+  "nextPageStaticPaths": {
+    "prefix": "npspth",
+    "body": [
+      "const ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}} = ({}) => {",
+      "  return <div>${2}</div>",
+      "}",
+      "",
+      "export const getStaticPaths = async () => {",
+      "  return {",
+      "    paths: [],",
+      "    fallback: false,",
+      "  }",
+      "}",
+      "",
+      "export default ${1}"
+    ]
+  },
+  "nextServerSideProps": {
+    "prefix": "nssp",
+    "body": [
+      "export const getServerSideProps = async (ctx) => {",
+      "  return {",
+      "    props: {}",
+      "  }",
+      "}"
+    ]
+  },
+  "nextStaticProps": {
+    "prefix": "nsp",
+    "body": [
+      "export const getStaticProps = async (ctx) => {",
+      "  return {",
+      "    props: {},",
+      "  }",
+      "}"
+    ]
+  },
+  "nextStaticPaths": {
+    "prefix": "nspth",
+    "body": [
+      "export const getStaticPaths = async () => {",
+      "  return {",
+      "    paths: [],",
+      "    fallback: false,",
+      "  }",
+      "}"
+    ]
+  },
+  "nextImage": {
+    "prefix": "nimg",
+    "body": [
+      "<Image src=\"${1}\" alt=\"${2}\" />"
+    ]
+  }
+}
