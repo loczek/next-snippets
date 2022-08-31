@@ -106,6 +106,17 @@ export const generateNextComponents = () => {
     body: [`<Image src="${first}" alt="${second}" />`],
   };
 
+  const NextApp: Snippet = {
+    prefix: "napp",
+    body: [
+      tsImport("import type { AppProps } from 'next/app'"),
+      tsSpace(),
+      `export default function MyApp({ Component, pageProps }${tsType("AppProps")}) {`,
+      "  return <Component {...pageProps} />",
+      "}",
+    ],
+  };
+
   return [
     NextPage,
     NextPageServerSideProps,
