@@ -96,6 +96,11 @@ export const generateNextComponents = () => {
     body: [...getStaticPaths()],
   };
 
+  const NextInitialProps: Snippet = {
+    prefix: "nip",
+    body: [`${fileNameCapitalized}.getInitialProps = async (ctx) => {`, "  return {", `    ${second}`, "  }", "}"],
+  };
+
   const NextImage: Snippet = {
     prefix: "nimg",
     body: [`<Image src="${first}" alt="${second}" />`],
