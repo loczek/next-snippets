@@ -1,9 +1,9 @@
-import { first } from "../utils/placeholders";
+import { fileNameCapitalized, first } from "../utils/placeholders";
 import { tsString } from "../utils/typescript";
 
 export const interfaceProps = "interface Props {}";
 export const importNext = "import { NextPage } from 'next'";
-export const exportDefault = `export default ${first}`;
+export const exportDefault = `export default ${fileNameCapitalized}`;
 export const importNextAndGetServerSideProps = () =>
   `import { NextPage${tsString(", GetServerSideProps")} } from 'next'`;
 export const importNextAndGetStaticProps = () => `import { NextPage${tsString(", GetStaticProps")} } from 'next'`;
