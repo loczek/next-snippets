@@ -7,25 +7,28 @@
 - `nssp` - nextServerSideProps
 - `nsp` - nextStaticProps
 - `nspth` - nextStaticPaths
+- `nip` - nextInitialProps
 - `nimg` - nextImage
-- `na` - nextApi
-- `nm` - nextMiddleware
+- `napp` - nextApp
+- `ndoc` - nextDocument
+- `napi` - nextApi
+- `nmid` - nextMiddleware
 
 ## `np` - nextPage
 
 ```javascript
 const FileName = ({}) => {
-  return <div>$2</div>
+  return <div></div>
 }
 
-export default $1
+export default FileName
 ```
 
 ## `npssp` - nextPageServerSideProps
 
 ```javascript
 const FileName = ({}) => {
-  return <div>$2</div>
+  return <div></div>
 }
 
 export const getServerSideProps = async (ctx) => {
@@ -34,14 +37,14 @@ export const getServerSideProps = async (ctx) => {
   }
 }
 
-export default $1
+export default FileName
 ```
 
 ## `npsp` - nextPageStaticProps
 
 ```javascript
 const FileName = ({}) => {
-  return <div>$2</div>
+  return <div></div>
 }
 
 export const getStaticProps = async (ctx) => {
@@ -50,14 +53,14 @@ export const getStaticProps = async (ctx) => {
   }
 }
 
-export default $1
+export default FileName
 ```
 
 ## `npspth` - nextPageStaticPaths
 
 ```javascript
 const FileName = ({}) => {
-  return <div>$2</div>
+  return <div></div>
 }
 
 export const getStaticPaths = async () => {
@@ -67,7 +70,7 @@ export const getStaticPaths = async () => {
   }
 }
 
-export default $1
+export default FileName
 ```
 
 ## `nssp` - nextServerSideProps
@@ -101,26 +104,71 @@ export const getStaticPaths = async () => {
 }
 ```
 
-## `nimg` - nextImage
+## `nip` - nextInitialProps
 
 ```javascript
-<Image src="$1" alt="$2" />
-```
-
-## `na` - nextApi
-
-```javascript
-export default (req, res) => {
-  ${1}
+FileName.getInitialProps = async (ctx) => {
+  return {
+    
+  }
 }
 ```
 
-## `nm` - nextMiddleware
+## `nimg` - nextImage
+
+```javascript
+<Image src="" alt="" />
+```
+
+## `napp` - nextApp
+
+```javascript
+export default function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
+```
+
+## `ndoc` - nextDocument
+
+```javascript
+import Document, { Html, Head, Main, NextScript } from 'next/document'
+
+class MyDocument extends Document {
+  static async getInitialProps(ctx) {
+    const initialProps = await Document.getInitialProps(ctx)
+    return { ...initialProps }
+  }
+
+  render() {
+    return (
+      <Html>
+        <Head />
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
+}
+
+export default MyDocument
+```
+
+## `napi` - nextApi
+
+```javascript
+export default (req, res) => {
+  
+}
+```
+
+## `nmid` - nextMiddleware
 
 ```javascript
 import { NextResponse } from 'next/server'
 export async function middleware(request) {
-  ${1}
+  
 }
 
 export const config = {

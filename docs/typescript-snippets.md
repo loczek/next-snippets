@@ -7,9 +7,12 @@
 - `nssp` - nextServerSideProps
 - `nsp` - nextStaticProps
 - `nspth` - nextStaticPaths
+- `nip` - nextInitialProps
 - `nimg` - nextImage
-- `na` - nextApi
-- `nm` - nextMiddleware
+- `napp` - nextApp
+- `ndoc` - nextDocument
+- `napi` - nextApi
+- `nmid` - nextMiddleware
 
 ## `np` - nextPage
 
@@ -19,10 +22,10 @@ import { NextPage } from 'next'
 interface Props {}
 
 const FileName: NextPage<Props> = ({}) => {
-  return <div>$2</div>
+  return <div></div>
 }
 
-export default $1
+export default FileName
 ```
 
 ## `npssp` - nextPageServerSideProps
@@ -33,7 +36,7 @@ import { NextPage, GetServerSideProps } from 'next'
 interface Props {}
 
 const FileName: NextPage<Props> = ({}) => {
-  return <div>$2</div>
+  return <div></div>
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -42,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 }
 
-export default $1
+export default FileName
 ```
 
 ## `npsp` - nextPageStaticProps
@@ -53,7 +56,7 @@ import { NextPage, GetStaticProps } from 'next'
 interface Props {}
 
 const FileName: NextPage<Props> = ({}) => {
-  return <div>$2</div>
+  return <div></div>
 }
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
@@ -62,7 +65,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   }
 }
 
-export default $1
+export default FileName
 ```
 
 ## `npspth` - nextPageStaticPaths
@@ -73,7 +76,7 @@ import { NextPage, GetStaticPaths } from 'next'
 interface Props {}
 
 const FileName: NextPage<Props> = ({}) => {
-  return <div>$2</div>
+  return <div></div>
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -83,7 +86,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export default $1
+export default FileName
 ```
 
 ## `nssp` - nextServerSideProps
@@ -117,13 +120,60 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 ```
 
+## `nip` - nextInitialProps
+
+```typescript
+FileName.getInitialProps = async (ctx) => {
+  return {
+    
+  }
+}
+```
+
 ## `nimg` - nextImage
 
 ```typescript
-<Image src="$1" alt="$2" />
+<Image src="" alt="" />
 ```
 
-## `na` - nextApi
+## `napp` - nextApp
+
+```typescript
+import type { AppProps } from 'next/app'
+
+export default function MyApp({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />
+}
+```
+
+## `ndoc` - nextDocument
+
+```typescript
+import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
+
+class MyDocument extends Document {
+  static async getInitialProps(ctx: DocumentContext) {
+    const initialProps = await Document.getInitialProps(ctx)
+    return { ...initialProps }
+  }
+
+  render() {
+    return (
+      <Html>
+        <Head />
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
+}
+
+export default MyDocument
+```
+
+## `napi` - nextApi
 
 ```typescript
 import type { NextApiRequest, NextApiResponse } from 'next'
@@ -131,18 +181,18 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 interface Data {}
 
 export default (req: NextApiRequest, res: NextApiResponse<Data>) => {
-  ${1}
+  
 }
 ```
 
-## `nm` - nextMiddleware
+## `nmid` - nextMiddleware
 
 ```typescript
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
-  ${1}
+  
 }
 
 export const config = {
