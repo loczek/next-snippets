@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.1] - 2022-08-31
+
+### Added
+
+- `napp` - Next App
+- `ndoc` - Next Document
+- `nip` - Next Initial Props
+
+### Changed
+
+- reverted name change from `napi` to `na`
+- reverted name change from `nmid` to `nm`
+
+### Fixed
+
+- Removed placelohders from documentation
+
 ## [2.0.0] - 2022-08-31
 
 ### Added
