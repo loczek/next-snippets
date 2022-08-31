@@ -1,6 +1,6 @@
 import { Snippet } from "../gen";
-import { fileNameCapitalized, first, second } from "../utils/placeholders";
-import { tsImport, tsSpace, tsType } from "../utils/typescript";
+import { fileName, fileNameCapitalized, first, second } from "../utils/placeholders";
+import { tsImport, tsSpace, tsString, tsType } from "../utils/typescript";
 import {
   exportDefault,
   getServerSideProps,
@@ -117,6 +117,34 @@ export const generateNextComponents = () => {
     ],
   };
 
+  const NextDocument: Snippet = {
+    prefix: "ndoc",
+    body: [
+      `import Document, { Html, Head, Main, NextScript${tsString(", DocumentContext")} } from 'next/document'`,
+      "",
+      "class MyDocument extends Document {",
+      `  static async getInitialProps(ctx${tsType("DocumentContext")}) {`,
+      "    const initialProps = await Document.getInitialProps(ctx)",
+      "    return { ...initialProps }",
+      "  }",
+      "",
+      "  render() {",
+      "    return (",
+      "      <Html>",
+      "        <Head />",
+      "        <body>",
+      "          <Main />",
+      "          <NextScript />",
+      "        </body>",
+      "      </Html>",
+      "    );",
+      "  }",
+      "}",
+      "",
+      "export default MyDocument",
+    ],
+  };
+
   return [
     NextPage,
     NextPageServerSideProps,
@@ -125,6 +153,9 @@ export const generateNextComponents = () => {
     NextServerSideProps,
     NextStaticProps,
     NextStaticPaths,
+    NextInitialProps,
     NextImage,
+    NextApp,
+    NextDocument,
   ];
 };
