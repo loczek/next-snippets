@@ -1,6 +1,6 @@
 {
   "nextApi": {
-    "prefix": "na",
+    "prefix": "napi",
     "body": [
       "import type { NextApiRequest, NextApiResponse } from 'next'",
       "",
@@ -12,7 +12,7 @@
     ]
   },
   "nextMiddleware": {
-    "prefix": "nm",
+    "prefix": "nmid",
     "body": [
       "import { NextResponse } from 'next/server'",
       "import type { NextRequest } from 'next/server'",

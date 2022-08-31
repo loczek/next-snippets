@@ -6,7 +6,7 @@
       "  return <div>${2}</div>",
       "}",
       "",
-      "export default ${1}"
+      "export default ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}}"
     ]
   },
   "nextPageServerSideProps": {
@@ -22,7 +22,7 @@
       "  }",
       "}",
       "",
-      "export default ${1}"
+      "export default ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}}"
     ]
   },
   "nextPageStaticProps": {
@@ -38,7 +38,7 @@
       "  }",
       "}",
       "",
-      "export default ${1}"
+      "export default ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}}"
     ]
   },
   "nextPageStaticPaths": {
@@ -55,7 +55,7 @@
       "  }",
       "}",
       "",
-      "export default ${1}"
+      "export default ${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}}"
     ]
   },
   "nextServerSideProps": {
@@ -89,10 +89,55 @@
       "}"
     ]
   },
+  "nextInitialProps": {
+    "prefix": "nip",
+    "body": [
+      "${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}}.getInitialProps = async (ctx) => {",
+      "  return {",
+      "    ${2}",
+      "  }",
+      "}"
+    ]
+  },
   "nextImage": {
     "prefix": "nimg",
     "body": [
       "<Image src=\"${1}\" alt=\"${2}\" />"
+    ]
+  },
+  "nextApp": {
+    "prefix": "napp",
+    "body": [
+      "export default function MyApp({ Component, pageProps }) {",
+      "  return <Component {...pageProps} />",
+      "}"
+    ]
+  },
+  "nextDocument": {
+    "prefix": "ndoc",
+    "body": [
+      "import Document, { Html, Head, Main, NextScript } from 'next/document'",
+      "",
+      "class MyDocument extends Document {",
+      "  static async getInitialProps(ctx) {",
+      "    const initialProps = await Document.getInitialProps(ctx)",
+      "    return { ...initialProps }",
+      "  }",
+      "",
+      "  render() {",
+      "    return (",
+      "      <Html>",
+      "        <Head />",
+      "        <body>",
+      "          <Main />",
+      "          <NextScript />",
+      "        </body>",
+      "      </Html>",
+      "    );",
+      "  }",
+      "}",
+      "",
+      "export default MyDocument"
     ]
   }
 }

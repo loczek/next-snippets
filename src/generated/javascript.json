@@ -1,6 +1,6 @@
 {
   "nextApi": {
-    "prefix": "na",
+    "prefix": "napi",
     "body": [
       "export default (req, res) => {",
       "  ${1}",
@@ -8,7 +8,7 @@
     ]
   },
   "nextMiddleware": {
-    "prefix": "nm",
+    "prefix": "nmid",
     "body": [
       "import { NextResponse } from 'next/server'",
       "export async function middleware(request) {",
