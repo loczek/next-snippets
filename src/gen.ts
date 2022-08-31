@@ -3,6 +3,17 @@ import path from "path";
 import { generateNextLang } from "./snippets/lang";
 import { generateNextComponents } from "./snippets/react";
 import { fileName, fileNameCapitalized, first, second, third } from "./utils/placeholders";
+import {
+  fileNameCapitalizedReplace,
+  fileNameCapitalizedReplaceMd,
+  fileNameReplaceMd,
+  firstReplace,
+  firstReplaceMd,
+  secondReplace,
+  secondReplaceMd,
+  thirdReplace,
+  thirdReplaceMd,
+} from "./utils/replace";
 import { changeLang, isTs, tsImport, tsSpace } from "./utils/typescript";
 
 interface PrefixToName {
@@ -13,14 +24,6 @@ export interface Snippet {
   prefix: string;
   body: (string | null)[];
 }
-interface NextPage extends Snippet {
-  prefix: "np";
-}
-interface ServerSideProps extends Snippet {
-  prefix: "ssp";
-}
-
-type Combined = NextPage | ServerSideProps;
 
 const prefixToName: PrefixToName = {
   np: "nextPage",
@@ -30,9 +33,12 @@ const prefixToName: PrefixToName = {
   nssp: "nextServerSideProps",
   nsp: "nextStaticProps",
   nspth: "nextStaticPaths",
-  na: "nextApi",
-  nm: "nextMiddleware",
+  nip: "nextInitialProps",
+  napi: "nextApi",
+  nmid: "nextMiddleware",
   nimg: "nextImage",
+  napp: "nextApp",
+  ndoc: "nextDocument",
 };
 
 export function generateSnippets(withMarkdown: boolean = false) {
@@ -72,11 +78,11 @@ function saveMarkdown(data: Snippet[], type: "js" | "ts") {
     snippets[prefixToName[snippet.prefix]] = snippet;
   }
   const snippetString = JSON.stringify(snippets, null, 2)
-    .replace(new RegExp(fileName, "g"), "FileName")
-    .replace(new RegExp(first, "g"), "$1")
-    .replace(new RegExp(second, "g"), "$2")
-    .replace(new RegExp(third, "g"), "$3")
-    .replace(new RegExp(fileNameCapitalized, "g"), "FileName");
+    .replace(new RegExp(fileName, "g"), fileNameReplaceMd)
+    .replace(new RegExp(first, "g"), firstReplaceMd)
+    .replace(new RegExp(second, "g"), secondReplaceMd)
+    .replace(new RegExp(third, "g"), thirdReplaceMd)
+    .replace(new RegExp(fileNameCapitalized, "g"), fileNameCapitalizedReplaceMd);
 
   const snippetParsed = JSON.parse(snippetString) as {
     [key: string]: { prefix: string; body: string[] };
@@ -133,9 +139,13 @@ function saveSnippets(data: Snippet[], type: "tsx" | "jsx" | "ts" | "js" | "md")
     snippets[prefixToName[snippet.prefix]] = snippet;
   }
 
-  if (type === "js" || type === "ts") {
-    const snippetString = JSON.stringify(snippets, null, 2);
+  const snippetString = JSON.stringify(snippets, null, 2)
+    .replace(new RegExp(first, "g"), firstReplace)
+    .replace(new RegExp(second, "g"), secondReplace)
+    .replace(new RegExp(third, "g"), thirdReplace)
+    .replace(new RegExp(fileNameCapitalized, "g"), fileNameCapitalizedReplace);
 
+  if (type === "js" || type === "ts") {
     if (type === "js") {
       writeFile(__dirname + "/generated/javascript.json", snippetString, () => {
         console.log("Saved");
@@ -148,12 +158,6 @@ function saveSnippets(data: Snippet[], type: "tsx" | "jsx" | "ts" | "js" | "md")
   }
 
   if (type === "jsx" || type === "tsx") {
-    const snippetString = JSON.stringify(snippets, null, 2)
-      .replace(new RegExp(first, "g"), "${1}")
-      .replace(new RegExp(second, "g"), "${2}")
-      .replace(new RegExp(third, "g"), "${3}")
-      .replace(new RegExp(fileNameCapitalized, "g"), "${1:${TM_FILENAME_BASE/(.)/${1:/upcase}/}}");
-
     if (type === "jsx") {
       writeFile(__dirname + "/generated/javascriptreact.json", snippetString, () => {
         console.log("Saved");
