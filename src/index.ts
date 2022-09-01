@@ -8,11 +8,11 @@ import { generateSnippets } from "./gen";
 export async function activate(context: vscode.ExtensionContext) {
   console.log("Activating extension");
 
-  const xd = new Promise((resolve) => {
+  const gen = new Promise((resolve) => {
     resolve(generateSnippets());
   });
 
-  await xd;
+  await gen;
 
   console.log("Extension activated");
 }
