@@ -1,5 +1,4 @@
-import { writeFile } from "fs";
-import path from "path";
+import { readFileSync, writeFile, writeFileSync } from "fs";
 import { generateNextLang } from "./snippets/lang";
 import { generateNextComponents } from "./snippets/react";
 import { fileName, fileNameCapitalized, first, second, third } from "./utils/placeholders";
@@ -14,7 +13,7 @@ import {
   thirdReplace,
   thirdReplaceMd,
 } from "./utils/replace";
-import { changeLang, isTs, tsImport, tsSpace } from "./utils/typescript";
+import { changeLang } from "./utils/typescript";
 
 interface PrefixToName {
   [key: string]: string;
@@ -42,24 +41,37 @@ const prefixToName: PrefixToName = {
 };
 
 export function generateSnippets(withMarkdown: boolean = false) {
-  changeLang("js");
   console.time("gen");
   const nextSnippetsJs = generateNextComponents();
   const langSnippetsJs = generateNextLang();
   changeLang("ts");
   const nextSnippetsTs = generateNextComponents();
   const langSnippetsTs = generateNextLang();
+  console.timeEnd("gen");
 
   saveSnippets(langSnippetsTs, "ts");
   saveSnippets(langSnippetsJs, "js");
   saveSnippets(nextSnippetsTs, "tsx");
   saveSnippets(nextSnippetsJs, "jsx");
-  console.timeEnd("gen");
 
   if (withMarkdown) {
-    saveMarkdown([...nextSnippetsJs, ...langSnippetsJs], "js");
     saveMarkdown([...nextSnippetsTs, ...langSnippetsTs], "ts");
+    saveMarkdown([...nextSnippetsJs, ...langSnippetsJs], "js");
+    saveReadme();
   }
+}
+
+function saveReadme() {
+  const base = readFileSync(__dirname + "/../docs/base.md");
+  const ts = readFileSync(__dirname + "/../docs/typescript-snippets.md");
+  const js = readFileSync(__dirname + "/../docs/javascript-snippets.md");
+  const totalLength = base.length + ts.length + js.length;
+
+  const combined = Buffer.concat([base, ts, js], totalLength);
+
+  writeFile(__dirname + "/../README.md", combined, () => {
+    console.log("Generated readme");
+  });
 }
 
 function saveMarkdown(data: Snippet[], type: "js" | "ts") {
@@ -88,14 +100,11 @@ function saveMarkdown(data: Snippet[], type: "js" | "ts") {
     [key: string]: { prefix: string; body: string[] };
   };
 
-  console.log(snippetParsed);
-
-  let md = `# ${typeToName[type][0].toUpperCase()}${typeToName[type].slice(1)} snippets\n\n`;
+  let md = `\n# ${typeToName[type][0].toUpperCase()}${typeToName[type].slice(1)} snippets\n\n`;
 
   for (const snippet in snippetParsed) {
     if (Object.prototype.hasOwnProperty.call(snippetParsed, snippet)) {
       const element = snippetParsed[snippet];
-      console.log({ snippet, element });
 
       const example = [`- \`${element.prefix}\` - ${snippet}\n`];
 
@@ -106,7 +115,6 @@ function saveMarkdown(data: Snippet[], type: "js" | "ts") {
   for (const snippet in snippetParsed) {
     if (Object.prototype.hasOwnProperty.call(snippetParsed, snippet)) {
       const element = snippetParsed[snippet];
-      console.log({ snippet, element });
 
       const example = [
         "",
@@ -122,9 +130,8 @@ function saveMarkdown(data: Snippet[], type: "js" | "ts") {
     }
   }
 
-  writeFile(`./docs/${typeToName[type]}-snippets.md`, md, () => {
-    console.log("Saved");
-  });
+  writeFileSync(`./docs/${typeToName[type]}-snippets.md`, md);
+  console.log(`Generated ${type} markdown`);
 }
 
 function saveSnippets(data: Snippet[], type: "tsx" | "jsx" | "ts" | "js" | "md") {
@@ -147,25 +154,21 @@ function saveSnippets(data: Snippet[], type: "tsx" | "jsx" | "ts" | "js" | "md")
 
   if (type === "js" || type === "ts") {
     if (type === "js") {
-      writeFile(__dirname + "/generated/javascript.json", snippetString, () => {
-        console.log("Saved");
-      });
+      writeFileSync(__dirname + "/generated/javascript.json", snippetString);
+      console.log("Saved js snippets");
     } else if (type === "ts") {
-      writeFile(__dirname + "/generated/typescript.json", snippetString, () => {
-        console.log("Saved");
-      });
+      writeFileSync(__dirname + "/generated/typescript.json", snippetString);
+      console.log("Saved ts snippets");
     }
   }
 
   if (type === "jsx" || type === "tsx") {
     if (type === "jsx") {
-      writeFile(__dirname + "/generated/javascriptreact.json", snippetString, () => {
-        console.log("Saved");
-      });
+      writeFileSync(__dirname + "/generated/javascriptreact.json", snippetString);
+      console.log("Saved jsx snippets");
     } else if (type === "tsx") {
-      writeFile(__dirname + "/generated/typescriptreact.json", snippetString, () => {
-        console.log("Saved");
-      });
+      writeFileSync(__dirname + "/generated/typescriptreact.json", snippetString);
+      console.log("Saved tsx snippets ");
     }
   }
 }
