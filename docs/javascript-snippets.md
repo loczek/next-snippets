@@ -1,3 +1,4 @@
+
 # Javascript snippets
 
 - `np` - nextPage
