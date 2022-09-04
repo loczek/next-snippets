@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.3] - 2022-09-05
+
+### Fixed
+
+- fixed `napi` snippet
+
 ## [2.0.1] - 2022-08-31
 
 ### Added
