@@ -10,7 +10,7 @@ export const generateNextLang = () => {
       tsSpace(),
       tsImport("interface Data {}"),
       tsSpace(),
-      `export default (req${tsType("NextApiRequest")}, res${tsType("NextApiResponse<Data>")}) => {`,
+      `export default async function handler(req${tsType("NextApiRequest")}, res${tsType("NextApiResponse<Data>")}) {`,
       `  ${first}`,
       "}",
     ],
