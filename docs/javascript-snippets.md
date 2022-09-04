@@ -159,7 +159,7 @@ export default MyDocument
 ## `napi` - nextApi
 
 ```javascript
-export default (req, res) => {
+export default async function handler(req, res) {
   
 }
 ```

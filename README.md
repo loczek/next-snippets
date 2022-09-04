@@ -206,7 +206,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 interface Data {}
 
-export default (req: NextApiRequest, res: NextApiResponse<Data>) => {
+export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   
 }
 ```
@@ -386,7 +386,7 @@ export default MyDocument
 ## `napi` - nextApi
 
 ```javascript
-export default (req, res) => {
+export default async function handler(req, res) {
   
 }
 ```
